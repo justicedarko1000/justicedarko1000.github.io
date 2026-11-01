@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<title>Justice Darko, Ph.D.</title>
+<meta name="description" content="Justice Darko, Ph.D. Data & AI Technical Lead building agentic, causal and industrial AI systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky identity sidebar + one scrolling column of sections; navy carries structure, gold marks recognition. */
+:root {
+  --bg: #F7F6F3;
+  --surface: #FFFFFF;
+  --border: #E3E0D8;
+  --border-s: #D0CCBF;
+  --fg: #1A1814;
+  --fg-2: #5A5650;
+  --fg-3: #85807A;
+  --accent: #1B3A6B;
+  --accent-lt: #E8EDF5;
+  --accent-md: #2D5BA3;
+  --gold: #9A6B1E;
+  --gold-bg: #FDF3E0;
+  --gold-bd: #E6C35A;
+  --tag-bg: #EEECEA;
+  --tag-fg: #4A4640;
+  --on-accent: #FFFFFF;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --nav-w: 284px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #13120F; --surface: #1D1C18; --border: #2E2C27; --border-s: #3A3830;
+    --fg: #F0EDE6; --fg-2: #A8A49C; --fg-3: #7A766F;
+    --accent: #7BAAE8; --accent-lt: #1A2540; --accent-md: #9CC0F0;
+    --gold: #D4A54A; --gold-bg: #261E0A; --gold-bd: #9A7420;
+    --tag-bg: #262420; --tag-fg: #C0BAB0; --on-accent: #0F1420;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #13120F; --surface: #1D1C18; --border: #2E2C27; --border-s: #3A3830;
+  --fg: #F0EDE6; --fg-2: #A8A49C; --fg-3: #7A766F;
+  --accent: #7BAAE8; --accent-lt: #1A2540; --accent-md: #9CC0F0;
+  --gold: #D4A54A; --gold-bg: #261E0A; --gold-bd: #9A7420;
+  --tag-bg: #262420; --tag-fg: #C0BAB0; --on-accent: #0F1420;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 16px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3, ul, ol, dl, dd, figure { margin: 0; }
+a { color: var(--accent-md); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent-md); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--serif); text-wrap: balance; }
+
+.shell { display: flex; align-items: flex-start; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--nav-w); flex-shrink: 0;
+  position: sticky; top: env(safe-area-inset-top, 0px);
+  height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding-block: 28px 20px;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: 24px;
+  gap: 22px;
+}
+.id { display: grid; gap: 4px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+  display: grid; place-items: center; font: 600 21px/1 var(--sans); letter-spacing: -0.5px; margin-bottom: 10px; }
+.id-name { font: 600 17px/1.3 var(--serif); }
+.id-title { font-size: 12.5px; color: var(--fg-2); line-height: 1.45; }
+.id-sub { font-size: 12px; color: var(--accent-md); font-weight: 500; }
+.cl-label { font-size: 10.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; }
+.cl { display: grid; gap: 7px; }
+.cl-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--fg-2); min-width: 0; }
+.cl-item svg { flex-shrink: 0; color: var(--fg-3); }
+.cl-item a { color: var(--fg-2); text-decoration: none; }
+.cl-item a:hover { color: var(--accent-md); text-decoration: underline; }
+.mail { font-size: 11.5px; color: var(--fg-2); user-select: all; white-space: nowrap; }
+.copy { display: inline-grid; place-items: center; width: 26px; height: 26px; padding: 0; border-radius: 5px; border: 1px solid transparent;
+  background: transparent; color: var(--fg-3); cursor: pointer; margin-left: auto; flex-shrink: 0; }
+.copy:hover { border-color: var(--accent-md); color: var(--accent-md); }
+.nav { display: grid; gap: 2px; margin-inline: -24px; }
+.nav a { display: block; padding: 7px 24px; font-size: 13px; font-weight: 500; color: var(--fg-2); text-decoration: none; border-left: 3px solid transparent; }
+.nav a:hover { color: var(--fg); background: var(--accent-lt); }
+.nav a.active { color: var(--accent-md); border-left-color: var(--accent-md); background: var(--accent-lt); font-weight: 600; }
+.theme-btn { margin-top: auto; align-self: flex-start; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--border-s);
+  background: transparent; color: var(--fg-2); font: 400 12px/1 var(--sans); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.theme-btn:hover { background: var(--tag-bg); }
+
+/* ── Main ── */
+.main { flex: 1; min-width: 0; padding-block: 44px 64px; padding-left: max(48px, env(safe-area-inset-left, 0px)); padding-right: max(48px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 800px; display: grid; gap: 56px; }
+.col > *, section > *, .cards > * { min-width: 0; }
+section { display: grid; gap: 20px; }
+.section-hd { font-size: 21px; font-weight: 600; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+.sub-hd { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-md);
+  display: flex; align-items: center; gap: 8px; }
+.sub-hd::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* Hero */
+.hero { display: grid; gap: 14px; }
+.hero h1 { font-size: clamp(28px, 5vw, 38px); font-weight: 700; line-height: 1.15; }
+.role { font-size: 15px; color: var(--fg-2); }
+.role strong { color: inherit; font-weight: inherit; }
+.lede { font-size: 16.5px; line-height: 1.7; max-width: 640px; }
+.lede em { font-family: var(--serif); font-size: 1.06em; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+.stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.stat-n { font: 700 26px/1 var(--serif); color: var(--accent-md); font-variant-numeric: tabular-nums; }
+.stat-l { font-size: 12px; color: var(--fg-2); margin-top: 5px; line-height: 1.35; }
+.kw-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.kw { background: var(--accent-lt); color: var(--accent-md); border: 1px solid color-mix(in srgb, var(--accent-md) 45%, transparent);
+  border-radius: 20px; padding: 3px 11px; font-size: 12px; font-weight: 500; }
+
+/* Diagram */
+.diagram { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.diagram svg { display: block; width: 100%; min-width: 600px; height: auto; }
+.diagram .node rect { fill: var(--bg); stroke: var(--border-s); stroke-width: 1.2; }
+.diagram .node.key rect { fill: var(--accent-lt); stroke: var(--accent-md); }
+.diagram .node.human rect { fill: var(--gold-bg); stroke: var(--gold-bd); }
+.diagram text { fill: var(--fg); font: 500 12.5px var(--sans); }
+.diagram .edge { stroke: var(--fg-3); stroke-width: 1.2; fill: none; }
+.diagram .loop { stroke: var(--accent-md); stroke-dasharray: 4 4; }
+.diagram .note { fill: var(--accent-md); font: 500 11px var(--sans); }
+.diagram #arr path { fill: var(--fg-3); }
+.diagram #arrA path { fill: var(--accent-md); }
+figcaption { font-size: 13px; color: var(--fg-2); margin-top: 10px; max-width: 640px; }
+
+.prose { display: grid; gap: 14px; max-width: 660px; font-size: 15px; line-height: 1.75; }
+
+/* Cards */
+.cards { display: grid; gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; display: grid; gap: 8px; }
+.card > * { min-width: 0; }
+.card h3 { font-size: 16px; font-weight: 600; line-height: 1.35; }
+.card-meta { font-size: 12.5px; color: var(--fg-3); }
+.card-meta strong { color: var(--fg-2); font-weight: 600; }
+.card-body { font-size: 14px; color: var(--fg-2); line-height: 1.65; }
+.result { display: inline-flex; align-self: start; justify-self: start; font-size: 12.5px; font-weight: 600; color: var(--accent-md);
+  background: var(--accent-lt); border-radius: 5px; padding: 3px 9px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.tag { background: var(--tag-bg); color: var(--tag-fg); border-radius: 4px; padding: 2px 8px; font-size: 11.5px; }
+.tag-blue { background: var(--accent-lt); color: var(--accent-md); }
+.tag-gold { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-bd); }
+
+/* Timeline */
+.tl { list-style: none; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--border); margin-left: 6px; }
+.tl li { position: relative; padding: 0 0 22px 22px; display: grid; gap: 3px; }
+.tl li:last-child { padding-bottom: 0; }
+.tl li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--accent-md); }
+.tl li.now::before { background: var(--accent-md); }
+.tl-when { font-size: 12px; font-weight: 600; color: var(--fg-3); letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.tl-role { font: 600 15.5px/1.35 var(--serif); }
+.tl-org { font-size: 13.5px; color: var(--accent-md); font-weight: 500; }
+.tl-body { font-size: 14px; color: var(--fg-2); }
+
+/* Publications */
+.pubs { display: grid; gap: 28px; }
+.pub-list { list-style: none; padding: 0; display: grid; }
+.pub-list li { padding-block: 11px; border-bottom: 1px solid var(--border); font-size: 13.5px; color: var(--fg-2); line-height: 1.6; }
+.pub-list li:first-child { padding-top: 4px; }
+.pub-list li:last-child { border-bottom: none; }
+.pub-list b { color: var(--fg); font-weight: 600; }
+.pub-list .t { color: var(--fg); }
+.pub-list i { color: var(--fg-3); }
+
+/* Patents */
+.pat { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pat .card { padding: 16px 18px; gap: 6px; }
+.pat h3 { font-size: 14.5px; }
+
+/* Skills / education */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.skill-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-md); }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { background: var(--tag-bg); color: var(--tag-fg); border-radius: 4px; padding: 3px 9px; font-size: 12.5px; }
+
+/* Awards */
+.awards { display: grid; }
+.award { display: flex; gap: 14px; align-items: flex-start; padding-block: 14px; border-bottom: 1px solid var(--border); }
+.award:first-child { padding-top: 0; }
+.award:last-child { border-bottom: none; }
+.award > div:last-child { min-width: 0; display: grid; gap: 2px; }
+.award-icon { width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0; display: grid; place-items: center;
+  background: var(--gold-bg); border: 1px solid var(--gold-bd); color: var(--gold); }
+.award-icon.svc { background: var(--accent-lt); border-color: color-mix(in srgb, var(--accent-md) 40%, transparent); color: var(--accent-md); }
+.award-name { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.award-org { font-size: 12.5px; color: var(--fg-3); }
+.award-desc { font-size: 13px; color: var(--fg-2); line-height: 1.55; margin-top: 2px; }
+
+.status { font-size: 11.5px; color: var(--accent-md); }
+.status:empty { display: none; }
+
+
+/* Plain, natural presentation */
+.facts { font-size: 14.5px; color: var(--fg-2); }
+.card { background: none; border: none; border-radius: 0; padding: 0 0 18px; border-bottom: 1px solid var(--border); }
+.cards { gap: 18px; }
+.cards > .card:last-child, .pat > .card:last-child { border-bottom: none; padding-bottom: 0; }
+.pat { gap: 18px 32px; }
+.pat .card { padding: 0 0 14px; }
+.result { background: none; padding: 0; border-radius: 0; font-weight: 500; font-size: 13.5px; font-style: italic; font-family: var(--serif); }
+.tag, .tag-blue, .tag-gold { background: none; border: none; padding: 0; border-radius: 0; color: var(--fg-3); font-size: 12.5px; }
+.tag-row { gap: 0 6px; }
+.tag + .tag::before { content: "·"; margin-right: 6px; color: var(--fg-3); }
+.grid2 { gap: 14px 32px; }
+.grid2 .card { border-bottom: none; padding: 0; gap: 4px; }
+.pills { display: block; font-size: 14px; color: var(--fg-2); }
+.pill { background: none; padding: 0; border-radius: 0; font-size: 14px; color: var(--fg-2); }
+.pill:not(:last-child)::after { content: ", "; }
+.award-icon { display: none; }
+.section-hd { border-bottom-width: 1px; border-bottom-color: var(--border-s); }
+.diagram { border-radius: 6px; }
+
+/* ── Mobile ── */
+@media (max-width: 860px) {
+  .shell { flex-direction: column; align-items: stretch; }
+  .sidebar { position: static; width: auto; height: auto; overflow: visible; border-right: none; border-bottom: 1px solid var(--border);
+    padding-block: 22px 14px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); gap: 16px; }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px; margin-inline: 0; }
+  .nav a { padding: 6px 11px; border-left: none; border-radius: 6px; font-size: 12.5px; }
+  .theme-btn { margin-top: 0; }
+  .main { padding-block: 28px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .col { gap: 44px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .pat, .grid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="id">
+            <div class="id-name">Justice Darko, Ph.D.</div>
+      <div class="id-title">Data &amp; AI Technical Lead</div>
+      <div class="id-sub">Agentic AI · Industrial AI</div>
+    </div>
+
+    <div>
+      <div class="cl-label">Contact</div>
+      <div class="cl">
+        <div class="cl-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>
+          <span class="mail" id="mail">justicedarko3@gmail.com</span>
+          <button class="copy" id="copy-email" type="button" aria-label="Copy email address" title="Copy email"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg></button>
+        </div>
+        <div class="status" id="copy-status" aria-live="polite"></div>
+        <div class="cl-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.15C0 .52.52 0 1.17 0h13.66C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.17 1.15H1.17C.52 16 0 15.48 0 14.85V1.15Zm4.94 12.24V6.17H2.54v7.22h2.4ZM3.74 5.18c.84 0 1.36-.55 1.36-1.25-.02-.71-.52-1.25-1.34-1.25-.82 0-1.36.54-1.36 1.25 0 .7.52 1.25 1.33 1.25h.01Zm4.91 8.21V9.36c0-.22.02-.43.08-.59.17-.43.57-.88 1.23-.88.87 0 1.22.66 1.22 1.63v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.28 0-1.84.7-2.16 1.2v.02h-.02l.02-.02V6.17h-2.4c.03.68 0 7.22 0 7.22h2.4Z"/></svg>
+          <a href="https://www.linkedin.com/in/justice-darko-ph-d-3b185280/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="cl-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1 0 6l8 5 6.5-4.06V11H16V6L8 1Zm-4.5 6.94V11c0 1.66 2.01 3 4.5 3s4.5-1.34 4.5-3V7.94L8 10.75 3.5 7.94Z"/></svg>
+          <a href="https://scholar.google.com/citations?user=m5N4ZAcAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+        <div class="cl-item">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a5.5 5.5 0 0 0-5.5 5.5c0 4.13 5.03 9.93 5.24 10.17a.35.35 0 0 0 .52 0c.21-.24 5.24-6.04 5.24-10.17A5.5 5.5 0 0 0 8 0Zm0 8a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+          <span>Greensboro, NC</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Pages">
+      <a href="#home" data-view="home" class="active">Home</a>
+      <a href="#research" data-view="research">Research</a>
+      <a href="#publications" data-view="publications">Publications &amp; Patents</a>
+      <a href="#skills" data-view="skills">Skills &amp; Education</a>
+      <a href="#awards" data-view="awards">Awards &amp; Service</a>
+    </nav>
+
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch between light and dark theme">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0Zm0 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13ZM16 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Z"/></svg>
+      Light / dark
+    </button>
+  </aside>
+
+  <main class="main">
+    <div class="col">
+
+      <!-- About -->
+      <section id="about" data-view="home" class="hero">
+        <h1>Justice Darko, Ph.D.</h1>
+        <p class="role"><strong>Data &amp; AI Technical Lead</strong> · Agentic AI · Industrial AI</p>
+        <p class="lede">I’m a data scientist and AI engineering lead. I build machine learning, causal inference, forecasting and agentic AI systems, and I take them from early research to tools that people rely on every day. Alongside industry work, I publish research and teach data science.</p>
+        <p class="facts">6 patents · 12+ peer-reviewed publications · Ph.D., 4.0 GPA · 4 years building production AI</p>
+
+        <figure style="margin-top:14px">
+          <div class="diagram">
+            <svg viewBox="0 0 800 250" role="img" aria-labelledby="dg-t">
+              <title id="dg-t">How I design agent systems: a request goes to a planner, which dispatches data, analysis and explanation agents; a validator checks the combined result and sends feedback to the planner until it passes; a person reviews the result before it becomes a decision.</title>
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+                <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+              </defs>
+              <path class="edge" d="M90 110 H118" marker-end="url(#arr)"/>
+              <path class="edge" d="M208 110 C 232 110, 232 40, 256 40" marker-end="url(#arr)"/>
+              <path class="edge" d="M208 110 H256" marker-end="url(#arr)"/>
+              <path class="edge" d="M208 110 C 232 110, 232 180, 256 180" marker-end="url(#arr)"/>
+              <path class="edge" d="M394 40 C 418 40, 418 110, 442 110" marker-end="url(#arr)"/>
+              <path class="edge" d="M394 110 H442" marker-end="url(#arr)"/>
+              <path class="edge" d="M394 180 C 418 180, 418 110, 442 110" marker-end="url(#arr)"/>
+              <path class="edge" d="M532 110 H560" marker-end="url(#arr)"/>
+              <path class="edge" d="M670 110 H698" marker-end="url(#arr)"/>
+              <path class="edge loop" d="M487 126 V222 H163 V128" marker-end="url(#arrA)"/>
+              <text class="note" x="325" y="242" text-anchor="middle">feedback until the result passes its checks</text>
+              <g class="node"><rect x="6" y="94" width="84" height="32" rx="6"/><text x="48" y="114.5" text-anchor="middle">Request</text></g>
+              <g class="node key"><rect x="120" y="94" width="88" height="32" rx="6"/><text x="164" y="114.5" text-anchor="middle">Planner</text></g>
+              <g class="node"><rect x="258" y="24" width="136" height="32" rx="6"/><text x="326" y="44.5" text-anchor="middle">Data agent</text></g>
+              <g class="node"><rect x="258" y="94" width="136" height="32" rx="6"/><text x="326" y="114.5" text-anchor="middle">Analysis agent</text></g>
+              <g class="node"><rect x="258" y="164" width="136" height="32" rx="6"/><text x="326" y="184.5" text-anchor="middle">Explanation agent</text></g>
+              <g class="node key"><rect x="444" y="94" width="88" height="32" rx="6"/><text x="488" y="114.5" text-anchor="middle">Validator</text></g>
+              <g class="node human"><rect x="562" y="94" width="108" height="32" rx="6"/><text x="616" y="114.5" text-anchor="middle">Human review</text></g>
+              <g class="node"><rect x="700" y="94" width="94" height="32" rx="6"/><text x="747" y="114.5" text-anchor="middle">Decision</text></g>
+            </svg>
+          </div>
+          <figcaption>How I design agent systems for production. Specialized agents do the work, a validator checks every answer, and people stay in control of the final decision.</figcaption>
+        </figure>
+
+        <div class="prose" style="margin-top:8px">
+          <p>My career spans rigorous academic research and production AI in industry. I lead AI engineering projects on a data analytics and insights team, building agentic systems, causal inference pipelines and forecasting frameworks on Databricks, Azure and Google Cloud.</p>
+          <p>My doctoral research at North Carolina A&amp;T State University, under Prof. John Park, focused on multi-agent coordination and AI for autonomous systems. You can read more on the <a href="#research">Research</a> page. I care about systems that are technically sound, deployable, and explainable to the people who use them.</p>
+          <p>I also teach. I start as a Lecturer of Data Science at NC State University in Spring 2027, after earlier faculty and teaching roles in Ghana.</p>
+        </div>
+      </section>
+
+      <!-- Expertise -->
+      <section id="expertise" data-view="home">
+        <h2 class="section-hd">What I build</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Agentic and multi-agent AI systems</h3>
+            <span class="result">In production with several business teams</span>
+            <p class="card-body">Designed and shipped a production multi-agent system in which a planner coordinates data-retrieval, causal-analysis and explanation agents through a custom coordination layer. A critic and validator loop checks every answer before it reaches users.</p>
+            <div class="tag-row"><span class="tag tag-blue">LangGraph</span><span class="tag tag-blue">AutoGen</span><span class="tag tag-blue">Custom orchestration</span><span class="tag">MCP</span><span class="tag">RAG</span></div>
+          </article>
+          <article class="card">
+            <h3>Decision intelligence and causal AI</h3>
+            <span class="result">~50% faster ad hoc analysis</span>
+            <p class="card-body">Built a reusable analytics framework that connects natural-language query agents to governed enterprise data, with plug-in classifier and causal modules, SHAP and LLM explanations, and a human-in-the-loop app. Also built decision-support pipelines with built-in audit trails that flag operational issues early.</p>
+            <div class="tag-row"><span class="tag tag-blue">Causal inference</span><span class="tag tag-blue">Explainable AI</span><span class="tag">Databricks</span></div>
+          </article>
+          <article class="card">
+            <h3>Forecasting and time series</h3>
+            <span class="result">Up to ~15% lower forecast error · Innovation Award</span>
+            <p class="card-body">Created a wavelet-enhanced ensemble framework for demand forecasting that combines signal decomposition with ensemble ML, using causal discovery to pick market drivers leaders can read and question.</p>
+            <div class="tag-row"><span class="tag tag-blue">Wavelets</span><span class="tag tag-blue">Ensembles</span><span class="tag">Causal discovery</span><span class="tag tag-gold">Innovation Award</span></div>
+          </article>
+          <article class="card">
+            <h3>Industrial process analytics</h3>
+            <span class="result">Patented methods · peer-reviewed results</span>
+            <p class="card-body">Co-developed golden-batch root-cause analysis, batch synchronization with dynamic time warping, and anomaly detection for industrial batch processes such as bioreactor fermentation.</p>
+            <div class="tag-row"><span class="tag tag-blue">Root-cause analysis</span><span class="tag tag-blue">Anomaly detection</span><span class="tag">Dynamic time warping</span></div>
+          </article>
+          <article class="card">
+            <h3>Natural-language data assistants</h3>
+            <span class="result">Used by leadership</span>
+            <p class="card-body">Design and tune natural-language assistants that let leaders ask questions of business data in plain English, with a focus on answer accuracy and concise, maintainable instructions.</p>
+            <div class="tag-row"><span class="tag tag-blue">Text-to-SQL</span><span class="tag">Prompt design</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" data-view="home">
+        <h2 class="section-hd">Experience</h2>
+        <ol class="tl">
+          <li class="now">
+            <span class="tl-when">Spring 2027</span>
+            <span class="tl-role">Lecturer of Data Science</span>
+            <span class="tl-org">NC State University, Data Science and AI Academy · Raleigh, NC</span>
+            <p class="tl-body">Teaching DSA-405 Data Wrangling &amp; Web Scraping, a project-based course for students across every college.</p>
+          </li>
+          <li class="now">
+            <span class="tl-when">Oct 2022 – Present</span>
+            <span class="tl-role">Senior Data Scientist (Data &amp; AI Technical Lead)</span>
+            <span class="tl-org">Rockwell Automation, Data Analytics &amp; Insights · Milwaukee, WI</span>
+            <p class="tl-body">Lead AI engineering projects building agentic, causal and forecasting systems; set engineering standards, run sprint planning, and mentor engineers, data scientists and interns.</p>
+          </li>
+          <li>
+            <span class="tl-when">Aug 2022 – Jan 2023</span>
+            <span class="tl-role">Postdoctoral Researcher</span>
+            <span class="tl-org">North Carolina A&amp;T State University · Greensboro, NC</span>
+            <p class="tl-body">Research and development for sponsored projects in Computational Science and Engineering under Prof. John Park.</p>
+          </li>
+          <li>
+            <span class="tl-when">2018 – 2022</span>
+            <span class="tl-role">Graduate Student Researcher</span>
+            <span class="tl-org">NASA Drone Project and U.S. DOT Center for Advanced Transportation Mobility · NC A&amp;T</span>
+            <p class="tl-body">Multi-agent coordination, reinforcement learning and path planning research (see Research below). Guest instructor in systems engineering, modeling, simulation and visualization (2020).</p>
+          </li>
+          <li>
+            <span class="tl-when">2015 – 2018</span>
+            <span class="tl-role">Assistant Faculty</span>
+            <span class="tl-org">Ghana Communication Technology University · Accra, Ghana</span>
+            <p class="tl-body">Designed curriculum and taught Intro to Computer Programming and Intro to Data Science (Python, SQL, C++); supervised undergraduate research.</p>
+          </li>
+          <li>
+            <span class="tl-when">2013 – 2015</span>
+            <span class="tl-role">Research and Teaching Assistant</span>
+            <span class="tl-org">University of Ghana · Accra, Ghana</span>
+            <p class="tl-body">Led tutorials, assessed coursework and supervised physics laboratory experiments.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Research -->
+      <section id="research" data-view="research">
+        <h2 class="section-hd">Research</h2>
+        <p class="prose">My research is about AI that can reason about cause and effect, coordinate as teams of agents, and hold up in real industrial settings. It runs from my doctoral work on multi-agent coordination to applied AI research I lead in industry today, with results in peer-reviewed venues and patents.</p>
+
+        <div class="sub-hd">Current research themes</div>
+        <div class="cards">
+          <article class="card">
+            <h3>Reliable agentic AI and multi-agent coordination</h3>
+            <p class="card-meta"><strong>Industry research</strong> · 2024 – Present</p>
+            <p class="card-body">How to make teams of LLM agents dependable enough for production: planner and specialist-agent designs, critic and validator loops that check answers before people see them, and human review at the decision point. This extends my earlier work on coordination protocols for autonomous vehicles to modern language-model agents.</p>
+            <div class="tag-row"><span class="tag">LLM agents</span><span class="tag">Orchestration</span><span class="tag">Validation</span><span class="tag">Human in the loop</span></div>
+          </article>
+          <article class="card">
+            <h3>Causal AI for industrial decision-making</h3>
+            <p class="card-meta"><strong>Industry research</strong> · 2022 – Present</p>
+            <p class="card-body">Using causal discovery and causal inference so models explain <em>why</em> outcomes change, not only predict them. The work pairs causal models with SHAP and LLM-generated explanations so business users can question and trust the results.</p>
+            <div class="tag-row"><span class="tag">Causal discovery</span><span class="tag">Causal inference</span><span class="tag">Explainable AI</span></div>
+          </article>
+          <article class="card">
+            <h3>Root-cause analysis and anomaly detection for industrial processes</h3>
+            <p class="card-meta"><strong>Industry research</strong> · 2023 – Present · 5 patents · <a href="#publications">Frontiers in Manufacturing Technology, 2024</a></p>
+            <p class="card-body">Golden-batch methods that compare each production run against an ideal reference to find what went wrong and why, plus batch synchronization with dynamic time warping and anomaly detection for processes such as bioreactor fermentation.</p>
+            <div class="tag-row"><span class="tag">Root-cause analysis</span><span class="tag">Dynamic time warping</span><span class="tag">Anomaly detection</span></div>
+          </article>
+          <article class="card">
+            <h3>Interpretable forecasting with wavelet-enhanced ensembles</h3>
+            <p class="card-meta"><strong>Industry research</strong> · 2022 – Present · Innovation Award</p>
+            <p class="card-body">Combining wavelet signal decomposition with ensemble machine learning and causally selected drivers, so forecasts are both more accurate and easy for leaders to interpret.</p>
+            <div class="tag-row"><span class="tag">Time series</span><span class="tag">Wavelets</span><span class="tag">Ensemble learning</span></div>
+          </article>
+        </div>
+
+        <div class="sub-hd" style="margin-top:12px">Doctoral and postdoctoral research</div>
+        <div class="cards">
+          <article class="card">
+            <h3>Multi-Agent Coordination for UAVs and Emergency Vehicles (DRONETIM)</h3>
+            <p class="card-meta"><strong>CATM / U.S. DOT</strong> · NC A&amp;T State University · 2018 – 2022</p>
+            <p class="card-body">Designed a collaborative multi-agent framework in which unmanned aerial vehicles and emergency response vehicles share information and allocate tasks in real time, using dynamic distributed constraint optimization to speed up incident response.</p>
+            <div class="tag-row"><span class="tag">Multi-agent systems</span><span class="tag">DCOP</span><span class="tag">U.S. DOT-funded</span></div>
+          </article>
+          <article class="card">
+            <h3>Temporal Multimodal Multivariate Learning</h3>
+            <p class="card-meta"><strong>NASA Drone Project</strong> · NC A&amp;T State University · ACM SIGKDD 2022</p>
+            <p class="card-body">Co-developed a learning approach for multimodal, multivariate data that changes over time, presented at SIGKDD, a leading data mining and machine learning conference.</p>
+            <div class="tag-row"><span class="tag">Multimodal learning</span><span class="tag">Time series</span></div>
+          </article>
+          <article class="card">
+            <h3>Active Hurricane Sensing with Information-Theoretic Path Planning</h3>
+            <p class="card-meta"><strong>NASA Drone Project</strong> · NC A&amp;T State University · 2020 – 2022</p>
+            <p class="card-body">Developed path planning algorithms for the drones NOAA sends into hurricanes, using information-theoretic criteria to target the observations that most improve predictions of storm path and intensity. Covered in <a href="https://spectrumlocalnews.com/nc/triad/news/2020/09/04/researchers-developing-hurricane-drone-technology" target="_blank" rel="noopener">national news</a> and by <a href="https://www.ncat.edu/news/2020/06/drones-used-for-hurricane-data-collection.php" target="_blank" rel="noopener">NC A&amp;T</a>.</p>
+            <div class="tag-row"><span class="tag">Path planning</span><span class="tag">Information theory</span><span class="tag">NASA-funded</span></div>
+          </article>
+          <article class="card">
+            <h3>Risk-Sensitive Reinforcement Learning for Personalized Routing</h3>
+            <p class="card-meta"><strong>CATM / U.S. DOT</strong> · NC A&amp;T State University · 2018 – 2022</p>
+            <p class="card-body">Built a reinforcement learning framework for risk-sensitive, adaptive transit routing for paratransit riders and other vulnerable road users, plus ML models that predict the gap between actual and Google-estimated travel times.</p>
+            <div class="tag-row"><span class="tag">Reinforcement learning</span><span class="tag">Transit optimization</span></div>
+          </article>
+          <article class="card">
+            <h3>Spatiotemporal Entropy for Targeted Observation</h3>
+            <p class="card-meta"><strong>NASA Drone Project</strong> · NC A&amp;T State University · 2020 – 2022</p>
+            <p class="card-body">Applied multivariate cluster analysis to tropical cyclone data, using spatiotemporal entropy to find the most information-rich observation locations and guide drone routing.</p>
+            <div class="tag-row"><span class="tag">Clustering</span><span class="tag">Spatiotemporal modeling</span></div>
+          </article>
+          <article class="card">
+            <h3>Land Use Intensity Transition Analysis</h3>
+            <p class="card-meta"><strong>With Prof. Lyubov Kurkalova and Prof. John Park</strong> · NC A&amp;T State University</p>
+            <p class="card-body">Developed a new algorithm for analyzing GIS data to assess land use intensity transitions across North Carolina cropland.</p>
+            <div class="tag-row"><span class="tag">GIS</span><span class="tag">Spatial analysis</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Publications -->
+      <section id="publications" data-view="publications">
+        <h2 class="section-hd">Publications</h2>
+        <div class="pubs">
+          <div>
+            <div class="sub-hd">Journal articles</div>
+            <ul class="pub-list">
+              <li><b>Darko, J.</b> and Park, H. (2025). <span class="t">Proactive Distributed Emergency Response with Heterogeneous Tasks Allocation.</span> <i>International Journal of Distributed Sensor Networks</i>, 2025(1), 5552310.</li>
+              <li>Luo, D., He, M., <b>Darko, J.</b>, Seymour, L.F. and Maturana, F. (2024). <span class="t">The Golden Batch-Driven Root Cause Analysis for Anomalies in Bioreactor Fermentation Process.</span> <i>Frontiers in Manufacturing Technology</i>, 4, 1392038.</li>
+              <li><b>Darko, J.</b>, Folsom, L., Park, H., Minamide, M., Ono, M., Su, H. <span class="t">A Sampling-Based Path Planning Algorithm for Improving Observations in Tropical Cyclones.</span> <i>Earth and Space Science</i>.</li>
+              <li><b>Darko, J.</b>, Folsom, L., Pugh, N., Shirzad, K., Park, H., Owens, J., Miller, A. <span class="t">Adaptive Personalized Routing for Vulnerable Road Users.</span> <i>IET Intelligent Transport Systems</i>.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-hd">Conference papers</div>
+            <ul class="pub-list">
+              <li>Park, H., <b>Darko, J.</b>, Deshpande, N., et al. (2022). <span class="t">Temporal Multimodal Multivariate Learning (TMML).</span> <i>ACM SIGKDD 2022</i>, Washington, DC.</li>
+              <li><b>Darko, J.</b>, Park, H. (2021). <span class="t">Proactive Dynamic-Distributed Constraint Optimization Problem for Coordinated Response of UAVs and Ground Vehicles.</span> <i>6th IEEE International Conference on Intelligent Transportation Engineering (ICITE 2021)</i>, Beijing.</li>
+              <li><b>Darko, J.</b>, Folsom, L., Deshpande, N., Park, H. (2021). <span class="t">Distributed Constraint Optimization Problem for Coordinated Response of UAVs and Ground Vehicles.</span> <i>55th Conference on Information Sciences and Systems (CISS 2021)</i>.</li>
+              <li><b>Darko, J.</b>, Park, H. (2021). <span class="t">Multimodal Public Transit Routing Considering Travelers’ Risk-Preference.</span> <i>Transportation Research Forum (TRF 2021)</i>.</li>
+              <li><b>Darko, J.</b>, Park, H. (2021). <span class="t">Modeling and Assessing the Impact of a Traveler’s Preference on Transit Route-Choice Behavior.</span> <i>100th Annual Meeting of the Transportation Research Board (TRB 2021)</i>.</li>
+              <li>Shirzad, K., <b>Darko, J.</b>, et al. (2021). <span class="t">A Personalized Trip Planner for Vulnerable Road Users.</span> <i>100th Annual Meeting of the Transportation Research Board (TRB 2021)</i>.</li>
+              <li><b>Darko, J.</b>, Folsom, L., Park, H. (2021). <span class="t">Dynamic Routing of Unmanned-Aerial and Emergency Team Incident Management (DRONETIM).</span> <i>Transportation Science and Logistics Society Triennial Conference</i>, Arlington, VA.</li>
+              <li><b>Darko, J.</b>, Park, H. (2021). <span class="t">Transit User Route-Choice Modeling with Risk-Preference.</span> <i>Transportation Science and Logistics Society Triennial Conference</i>, Arlington, VA.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-hd">Book chapter</div>
+            <ul class="pub-list">
+              <li>Park, J., Pugh, N., <b>Darko, J.</b>, Folsom, L., Samuel, S. (2019). <span class="t">Explicit Forward Glance Duration Hidden Markov Model for Inference of Spillover Detection.</span> In <i>Advances in Human Factors of Transportation (AHFE 2019)</i>, AISC vol. 964, Springer.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="sub-hd">Presentations and posters</div>
+            <ul class="pub-list">
+              <li><b>Darko, J.</b>, Folsom, L., Deshpande, N., Park, H. <span class="t">A New Distributed Agent Framework for Traffic Incident Management.</span> <i>ASCE International Conference on Transportation &amp; Development</i>, 2021.</li>
+              <li><b>Darko, J.</b>, Park, H., Chow, J. <span class="t">Vulnerable Road User Personalized, Optimum and Dynamic Routing.</span> <i>8th International Symposium on Transport Network Reliability</i>, Stockholm, 2021.</li>
+              <li><b>Darko, J.</b>, Park, H. <span class="t">A Dynamic Transit Model for Vulnerable Road Users.</span> <i>INFORMS Annual Meeting</i>, Seattle, 2019.</li>
+              <li><b>Darko, J.</b>, Kurkalova, L., Park, H. <span class="t">The Intensity of North Carolina Cropland Use.</span> <i>AAEA Annual Meeting</i>, Atlanta, 2019.</li>
+              <li>Park, H., <b>Darko, J.</b> <span class="t">Dynamic Transit Modeling.</span> <i>NCDOT Research &amp; Innovation Summit</i>, 2019.</li>
+              <li>Folsom, L., <b>Darko, J.</b>, Pugh, N., Park, H. <span class="t">Travelers’ Rationality in Anticipatory Online Emergency Response.</span> <i>Safe Systems Summit</i>, Durham, 2019.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patents -->
+      <section id="patents" data-view="publications">
+        <h2 class="section-hd">Patents</h2>
+        <div class="pat">
+          <article class="card"><h3>Employing a Batch Model in Root Cause Analysis of Industrial Batch Performance Analytics</h3><p class="card-meta">Luo, L.D.; He, M.; <strong>Darko, J.</strong>; Maturana, F.; Seymour, L.</p><div class="tag-row"><span class="tag tag-blue">Root-cause analysis</span><span class="tag">Batch modeling</span></div></article>
+          <article class="card"><h3>Root Cause Analysis Framework in Industrial Process Analytics</h3><p class="card-meta">He, M.; Luo, L.D.; <strong>Darko, J.</strong>; et al.</p><div class="tag-row"><span class="tag tag-blue">Process analytics</span><span class="tag">Root-cause analysis</span></div></article>
+          <article class="card"><h3>Anomaly Detection in Industrial Batch Analytics</h3><p class="card-meta">Luo, L.D.; <strong>Darko, J.</strong>; He, M.; Schiele, W.J.; Seymour, L.F.; Maturana, P.F.</p><div class="tag-row"><span class="tag tag-blue">Anomaly detection</span><span class="tag">Industrial AI</span></div></article>
+          <article class="card"><h3>Batch Synchronization using Dynamic Time Warping (Online/Offline) in Industrial Batch Analytics</h3><p class="card-meta">He, M.; <strong>Darko, J.</strong>; Luo, L.D.; Schiele, W.J.; Seymour, L.F.; Maturana, P.F.</p><div class="tag-row"><span class="tag tag-blue">Dynamic time warping</span><span class="tag">Batch synchronization</span></div></article>
+          <article class="card"><h3>Batch Synchronization using Feature Functions in Industrial Batch Analytics</h3><p class="card-meta">He, M.; <strong>Darko, J.</strong>; Luo, L.D.; Schiele, W.J.; Seymour, L.F.; Maturana, P.F.</p><div class="tag-row"><span class="tag tag-blue">Batch analytics</span><span class="tag">Industrial AI</span></div></article>
+          <article class="card"><h3>Efficient Robotics Navigation through Global Mapping</h3><p class="card-meta">Park, H.; Folsom, L.; <strong>Darko, J.</strong>; Otsu, K.</p><div class="tag-row"><span class="tag tag-blue">Robotics</span><span class="tag">Navigation</span></div></article>
+        </div>
+      </section>
+
+      <!-- Skills & education -->
+      <section id="skills" data-view="skills">
+        <h2 class="section-hd">Skills and education</h2>
+        <div class="grid2">
+          <div class="card"><div class="skill-label">Agentic AI &amp; LLMs</div><div class="pills"><span class="pill">LangGraph</span><span class="pill">AutoGen</span><span class="pill">LangChain</span><span class="pill">Custom orchestration</span><span class="pill">MCP</span><span class="pill">RAG</span><span class="pill">LoRA / QLoRA</span></div></div>
+          <div class="card"><div class="skill-label">AI &amp; Machine Learning</div><div class="pills"><span class="pill">Causal inference</span><span class="pill">Causal discovery</span><span class="pill">Reinforcement learning</span><span class="pill">Deep learning</span><span class="pill">Ensemble methods</span><span class="pill">Bayesian ML</span><span class="pill">Optimization</span></div></div>
+          <div class="card"><div class="skill-label">Languages</div><div class="pills"><span class="pill">Python</span><span class="pill">TypeScript / JavaScript</span><span class="pill">SQL</span><span class="pill">R</span><span class="pill">MATLAB</span><span class="pill">C++</span></div></div>
+          <div class="card"><div class="skill-label">Cloud &amp; Platforms</div><div class="pills"><span class="pill">Databricks</span><span class="pill">Microsoft Azure</span><span class="pill">Google Cloud (Vertex AI)</span><span class="pill">FastAPI</span><span class="pill">React</span><span class="pill">Power BI</span><span class="pill">Looker</span></div></div>
+        </div>
+        <div class="sub-hd" style="margin-top:10px">Education</div>
+        <div class="cards">
+          <article class="card"><h3>Ph.D., Computational Science and Engineering</h3><p class="card-meta">North Carolina A&amp;T State University · 2018 – 2022 · GPA 4.0 / 4.0</p><p class="card-body">Advisor: Prof. John Park. Coursework in stochastic operations research, computational statistics, optimization, and computational modeling and visualization.</p></article>
+          <article class="card"><h3>M.Sc., Computational Nuclear Science and Engineering</h3><p class="card-meta">University of Ghana · 2011 – 2013 · GPA 3.68 / 4.0</p></article>
+          <article class="card"><h3>B.Sc., Physics and Computer Science</h3><p class="card-meta">University of Ghana · 2006 – 2010</p></article>
+        </div>
+      </section>
+
+      <!-- Awards & service -->
+      <section id="awards" data-view="awards">
+        <h2 class="section-hd">Awards and service</h2>
+        <div class="awards">
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">Innovation Award: Wavelet-Enhanced Ensemble Forecasting</div><div class="award-org">Corporate innovation award</div><div class="award-desc">For designing and deploying a forecasting framework that improved demand prediction accuracy in production.</div></div></div>
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">Travel Grant Award</div><div class="award-org">ACM SIGKDD, 2022</div><div class="award-desc">Competitive grant to present at SIGKDD 2022 in Washington, DC.</div></div></div>
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">Research Poster Award, 2nd Place</div><div class="award-org">NCDOT Research &amp; Innovation Summit</div><div class="award-desc">For research on intelligent transportation and vulnerable road user modeling.</div></div></div>
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">Travel Grant Award</div><div class="award-org">Agricultural and Applied Economics Association Annual Meeting, 2019</div><div class="award-desc">To present GIS-based research on North Carolina cropland use intensity.</div></div></div>
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">First-Year Doctoral Fellowship</div><div class="award-org">Graduate School, North Carolina A&amp;T State University</div></div></div>
+          <div class="award"><div class="award-icon" aria-hidden="true">★</div><div><div class="award-name">Best Graduate Student, School of Nuclear and Allied Sciences</div><div class="award-org">University of Ghana</div></div></div>
+          <div class="award"><div class="award-icon svc" aria-hidden="true">✎</div><div><div class="award-name">Journal Paper Reviewer</div><div class="award-org">2022 – Present</div><div class="award-desc">Peer review for journals in machine learning, transportation systems and applied AI.</div></div></div>
+          <div class="award"><div class="award-icon svc" aria-hidden="true">✎</div><div><div class="award-name">Guest Speaker: AI in Industry (Causal Inference)</div><div class="award-org">University of Wisconsin–Milwaukee, 2025</div><div class="award-desc">Invited lecture on applied causal inference for industrial AI and forecasting.</div></div></div>
+          <div class="award"><div class="award-icon svc" aria-hidden="true">✎</div><div><div class="award-name">Presenter and Judge, Summer Transportation Institute</div><div class="award-org">2019</div><div class="award-desc">Gave technical talks and evaluated student projects.</div></div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var EMAIL = 'justicedarko3@gmail.com';
+  var status = document.getElementById('copy-status');
+  function say(m) { status.textContent = m; setTimeout(function () { status.textContent = ''; }, 2500); }
+  function selectMail() { var r = document.createRange(); r.selectNodeContents(document.getElementById('mail')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  document.getElementById('copy-email').addEventListener('click', function () {
+    try { navigator.clipboard.writeText(EMAIL).then(function () { say('Email copied'); }, function () { selectMail(); say('Email selected, press Ctrl+C'); }); }
+    catch (e) { selectMail(); say('Email selected, press Ctrl+C'); }
+  });
+
+  // Theme toggle
+  var root = document.documentElement;
+  document.getElementById('theme-btn').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme');
+    if (!cur) cur = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  });
+
+  // Page switching: Home holds the essentials; deeper material sits on its own page
+  var VIEWS = ['home', 'research', 'publications', 'skills', 'awards'];
+  var ALIAS = { about: 'home', expertise: 'home', experience: 'home', patents: 'publications' };
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[data-view]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  function show(view, fromClick) {
+    view = ALIAS[view] || view;
+    if (VIEWS.indexOf(view) < 0) view = 'home';
+    sections.forEach(function (sec) { sec.hidden = sec.getAttribute('data-view') !== view; });
+    links.forEach(function (a) {
+      var on = a.getAttribute('data-view') === view;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    if (fromClick) {
+      var main = document.querySelector('.main');
+      if (window.innerWidth <= 860) main.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0);
+    }
+  }
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var v = a.getAttribute('data-view');
+      try { history.replaceState(null, '', '#' + v); } catch (err) { location.hash = v; }
+      show(v, true);
+    });
+  });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1), true); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+
+</body>
+</html>
